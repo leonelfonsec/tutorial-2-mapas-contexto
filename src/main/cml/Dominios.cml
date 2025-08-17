@@ -1,0 +1,49 @@
+Domain GestionIntegralDePartnerships {
+  domainVisionStatement = "Proveer una plataforma global que permita a las marcas crear, gestionar y escalar asociaciones estratégicas (afiliados, influencers, creadores de contenido, embajadores, medios y socios B2B), facilitando la colaboración y optimización de resultados mediante automatización, analítica avanzada y cumplimiento normativo"
+
+  /* Subdominios Núcleo (Core) */
+  Subdomain MarketingDeAfiliados {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Automatización de programas de afiliados (reclutamiento, contratos, tracking, pagos y optimización)"
+  }
+  Subdomain MarketingDeInfluencersYCreadores {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Gestión integral de campañas con creadores (descubrimiento, ejecución, medición y pagos)"
+  }
+  Subdomain ProgramasDeLealtad {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Activación de empleados y clientes leales como embajadores con recompensas automatizadas"
+  }
+  Subdomain GestionDeAlianzasEstrategicas {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Columna vertebral que administra el ciclo de vida de asociaciones, contratos, pagos y compliance"
+  }
+
+  /* Subdominios de Soporte */
+  Subdomain AnaliticaYReportes {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Dashboards avanzados, ROI, atribución y optimización de campañas"
+  }
+  Subdomain CumplimientoNormativoYAuditoria {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Procesos de regulación, antifraude y cumplimiento financiero"
+  }
+  Subdomain AutomatizacionDeProcesosInternos {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Workflows, integraciones y eficiencia operativa"
+  }
+
+  /* Subdominios Genéricos */
+  Subdomain GestionDePagosMultimoneda {
+    type = GENERIC_SUBDOMAIN
+    domainVisionStatement = "Pagos automáticos globales a afiliados y socios"
+  }
+  Subdomain InfraestructuraYDevOps {
+    type = GENERIC_SUBDOMAIN
+    domainVisionStatement = "Escalabilidad, despliegue, seguridad, disponibilidad"
+  }
+  Subdomain CRMYComunicaciones {
+    type = GENERIC_SUBDOMAIN
+    domainVisionStatement = "Relación con clientes, marketplace de socios y notificaciones"
+  }
+}
