@@ -1,0 +1,40 @@
+// ==============
+// Team Map (Organizacional)
+TeamMap GIP_TeamMap {
+  contains TeamAfiliados, TeamInfluencers, TeamLealtad, TeamAlianzas,
+           TeamPayments, TeamAnalytics, TeamCompliance, TeamCRMComms, TeamOps
+
+  TeamAfiliados  [D] <- [U] TeamAlianzas   { relationship = "Customer/Supplier" }
+  TeamInfluencers[D] <- [U] TeamAlianzas   { relationship = "Customer/Supplier" }
+  TeamLealtad    [D] <- [U] TeamAlianzas   { relationship = "Customer/Supplier" }
+
+  TeamAfiliados  [D] <- [U] TeamPayments   { relationship = "Upstream/Downstream" }
+  TeamInfluencers[D] <- [U] TeamPayments   { relationship = "Upstream/Downstream" }
+  TeamLealtad    [D] <- [U] TeamPayments   { relationship = "Upstream/Downstream" }
+
+  TeamAfiliados  [D] <- [U] TeamCompliance { relationship = "Upstream/Downstream" }
+  TeamInfluencers[D] <- [U] TeamCompliance { relationship = "Upstream/Downstream" }
+  TeamLealtad    [D] <- [U] TeamCompliance { relationship = "Upstream/Downstream" }
+  TeamAlianzas   [D] <- [U] TeamCompliance { relationship = "Upstream/Downstream" }
+
+  TeamAnalytics  [D] <- [U] TeamAfiliados  { relationship = "Upstream/Downstream" }
+  TeamAnalytics  [D] <- [U] TeamInfluencers{ relationship = "Upstream/Downstream" }
+  TeamAnalytics  [D] <- [U] TeamLealtad    { relationship = "Upstream/Downstream" }
+  TeamAnalytics  [D] <- [U] TeamPayments   { relationship = "Upstream/Downstream" }
+  TeamAnalytics  [D] <- [U] TeamAlianzas   { relationship = "Upstream/Downstream" }
+
+  TeamCRMComms   [D] <- [U] TeamAfiliados  { relationship = "Upstream/Downstream" }
+  TeamCRMComms   [D] <- [U] TeamInfluencers{ relationship = "Upstream/Downstream" }
+  TeamCRMComms   [D] <- [U] TeamLealtad    { relationship = "Upstream/Downstream" }
+  TeamCRMComms   [D] <- [U] TeamPayments   { relationship = "Upstream/Downstream" }
+}
+
+Team TeamAfiliados implements AfiliadosContexto
+Team TeamInfluencers implements InfluencersContexto
+Team TeamLealtad implements LealtadContexto
+Team TeamAlianzas implements AlianzasContexto
+Team TeamPayments implements PagosContexto
+Team TeamAnalytics implements AnaliticaContexto
+Team TeamCompliance implements CumplimientoContexto
+Team TeamCRMComms implements CRMComunicacionesContexto
+Team TeamOps implements AutomatizacionContexto

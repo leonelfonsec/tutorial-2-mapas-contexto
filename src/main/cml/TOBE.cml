@@ -1,0 +1,83 @@
+// ==============
+// Context Map TO-BE
+// GIP(GESTION INTEGRAL DE PARTNERSHIPS)
+// ==============
+ContextMap GIP_TOBE {
+  type = SYSTEM_LANDSCAPE
+  state = TO_BE
+  contains AfiliadosContexto, InfluencersContexto, LealtadContexto, AlianzasContexto,
+           AnaliticaContexto, CumplimientoContexto, AutomatizacionContexto, CRMComunicacionesContexto,
+           PagosContexto, PSPExterno, PlataformasSocialesAPI, PasarelaMensajeria, CRMExterno
+
+  AfiliadosContexto   [D,CF] <- [U,OHS] PagosContexto { implementationTechnology = "REST/Webhooks" }
+  InfluencersContexto [D,CF] <- [U,OHS] PagosContexto { implementationTechnology = "REST/Webhooks" }
+  LealtadContexto     [D,CF] <- [U,OHS] PagosContexto { implementationTechnology = "REST/Webhooks" }
+  PagosContexto       [D,ACL] <- [U,OHS] PSPExterno    { implementationTechnology = "REST" }
+
+  AfiliadosContexto   [D,ACL] <- [U,OHS] CumplimientoContexto
+  InfluencersContexto [D,ACL] <- [U,OHS] CumplimientoContexto
+  LealtadContexto     [D,ACL] <- [U,OHS] CumplimientoContexto
+  AlianzasContexto    [D,ACL] <- [U,OHS] CumplimientoContexto
+
+  AfiliadosContexto   [D,CF] <- [U,PL]  AlianzasContexto
+  InfluencersContexto [D,CF] <- [U,PL]  AlianzasContexto
+  LealtadContexto     [D,CF] <- [U,PL]  AlianzasContexto
+
+  InfluencersContexto [D,ACL] <- [U,OHS] PlataformasSocialesAPI { implementationTechnology = "REST/Webhooks" }
+
+  AnaliticaContexto           [D,CF] <- [U,PL] AfiliadosContexto
+  AnaliticaContexto           [D,CF] <- [U,PL] InfluencersContexto
+  AnaliticaContexto           [D,CF] <- [U,PL] LealtadContexto
+  AnaliticaContexto           [D,CF] <- [U,PL] PagosContexto
+  AnaliticaContexto           [D,CF] <- [U,PL] AlianzasContexto
+
+  CRMComunicacionesContexto   [D,CF] <- [U,PL] AfiliadosContexto
+  CRMComunicacionesContexto   [D,CF] <- [U,PL] InfluencersContexto
+  CRMComunicacionesContexto   [D,CF] <- [U,PL] LealtadContexto
+  CRMComunicacionesContexto   [D,CF] <- [U,PL] PagosContexto
+
+  CRMComunicacionesContexto   [D,ACL] <- [U,OHS] PasarelaMensajeria { implementationTechnology = "Email/SMS/Push APIs" }
+  CRMComunicacionesContexto   [D,ACL] <- [U,OHS] CRMExterno         { implementationTechnology = "REST" }
+}
+
+BoundedContext AfiliadosContexto implements MarketingDeAfiliados {
+  type = APPLICATION
+  domainVisionStatement = "Gestionar programas de afiliados end-to-end: reclutamiento, contratos, tracking, atribución y comisiones."
+}
+BoundedContext InfluencersContexto implements MarketingDeInfluencersYCreadores {
+  type = APPLICATION
+  domainVisionStatement = "Orquestar campañas con creadores: descubrimiento, contratación, entregas y medición de impacto."
+}
+BoundedContext LealtadContexto implements ProgramasDeLealtad {
+  type = APPLICATION
+  domainVisionStatement = "Activar y recompensar a embajadores (empleados/clientes) mediante retos, puntos y canjes."
+}
+BoundedContext AlianzasContexto implements GestionDeAlianzasEstrategicas {
+  type = APPLICATION
+  domainVisionStatement = "Backbone de partnerships: acuerdos, SLAs, catálogos de partners, riesgos y compliance."
+}
+BoundedContext AnaliticaContexto implements AnaliticaYReportes {
+  type = APPLICATION
+  domainVisionStatement = "Proveer KPIs y atribución multi-fuente en tiempo casi real a partir de eventos de negocio."
+}
+BoundedContext CumplimientoContexto implements CumplimientoNormativoYAuditoria {
+  type = APPLICATION
+  domainVisionStatement = "Proteger el negocio con KYC/KYB, antifraude y retenciones/conciliación según normativa."
+}
+BoundedContext AutomatizacionContexto implements AutomatizacionDeProcesosInternos {
+  type = APPLICATION
+  domainVisionStatement = "Estandarizar y orquestar workflows e integraciones internas entre contextos y terceros."
+}
+BoundedContext CRMComunicacionesContexto implements CRMYComunicaciones {
+  type = APPLICATION
+  domainVisionStatement = "Centralizar perfiles y ejecutar comunicaciones multicanal a partners y clientes."
+}
+BoundedContext PagosContexto implements GestionDePagosMultimoneda {
+  type = APPLICATION
+  domainVisionStatement = "Programar, ejecutar y conciliar pagos globales a partners con múltiples métodos y monedas."
+}
+
+BoundedContext PSPExterno implements GestionDePagosMultimoneda { type = SYSTEM }
+BoundedContext PlataformasSocialesAPI implements MarketingDeInfluencersYCreadores { type = SYSTEM }
+BoundedContext PasarelaMensajeria implements CRMYComunicaciones { type = SYSTEM }
+BoundedContext CRMExterno implements CRMYComunicaciones { type = SYSTEM }

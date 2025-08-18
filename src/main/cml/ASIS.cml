@@ -1,0 +1,28 @@
+// ==============
+// Context Map AS-IS
+// GIP(GESTION INTEGRAL DE PARTNERSHIPS)
+// ==============
+ContextMap GIP_ASIS {
+  type = SYSTEM_LANDSCAPE
+  state = AS_IS
+  contains MonolitoGIP, PSPExterno, PlataformasSocialesAPI, PasarelaMensajeria, CRMExterno, CumplimientoExterno, DWAnaliticaExterna
+
+  MonolitoGIP [D,CF] <- [U,OHS] PSPExterno             { implementationTechnology = "REST" }
+  MonolitoGIP [D,CF] <- [U,OHS] PlataformasSocialesAPI { implementationTechnology = "REST/Webhooks" }
+  MonolitoGIP [D,CF] <- [U,OHS] PasarelaMensajeria     { implementationTechnology = "Email/SMS/Push APIs" }
+  MonolitoGIP [D,CF] <- [U,OHS] CRMExterno             { implementationTechnology = "REST" }
+  MonolitoGIP [D,CF] <- [U,OHS] CumplimientoExterno    { implementationTechnology = "REST/Batch" }
+  MonolitoGIP [D,CF] <- [U,OHS] DWAnaliticaExterna     { implementationTechnology = "Batch/Events" }
+}
+
+BoundedContext MonolitoGIP implements MarketingDeAfiliados, MarketingDeInfluencersYCreadores, ProgramasDeLealtad, GestionDeAlianzasEstrategicas, AnaliticaYReportes, CumplimientoNormativoYAuditoria, AutomatizacionDeProcesosInternos, GestionDePagosMultimoneda, InfraestructuraYDevOps, CRMYComunicaciones {
+  type = APPLICATION
+  domainVisionStatement = "Un único despliegue con base compartida; alto acoplamiento, integraciones frágiles y métricas en batch."
+}
+
+BoundedContext PSPExterno implements GestionDePagosMultimoneda { type = SYSTEM }
+BoundedContext PlataformasSocialesAPI implements MarketingDeInfluencersYCreadores { type = SYSTEM }
+BoundedContext PasarelaMensajeria implements CRMYComunicaciones { type = SYSTEM }
+BoundedContext CRMExterno implements CRMYComunicaciones { type = SYSTEM }
+BoundedContext CumplimientoExterno implements CumplimientoNormativoYAuditoria { type = SYSTEM }
+BoundedContext DWAnaliticaExterna implements AnaliticaYReportes { type = SYSTEM }
